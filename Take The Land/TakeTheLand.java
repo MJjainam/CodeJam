@@ -1,4 +1,4 @@
-//package compete;
+//package compete;;
 
 
 /*prerequisites - Knowledge on basic classical dynamic problems . 
