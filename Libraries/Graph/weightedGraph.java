@@ -1,5 +1,4 @@
-// import sun.misc.Queue;
-
+import java.util.*;
 class weightedGraph {
     ArrayList<ArrayList<Edge>> graph;
     int N;
@@ -52,46 +51,40 @@ class weightedGraph {
     }
 
     //Used only when the graph weights are all equal.
-    public findShortestPathBFS()
-    {
+    public int[] findShortestPathBFS(int source) {
         visited = new boolean[N];
         int dist = 0;
         int[] distArray = new int[N];
         Queue<Integer> q = new LinkedList<>();
-        q.add(0);
-        distArray[0] = dist;
-        visited[0] =true;
+        q.add(source);
+        distArray[source] = dist;
+        visited[source] = true;
         q.add(-1);
-        while(q.size()!=1)
-        {
+        dist++;
+        while (q.size() != 1) {
             int a = q.remove();
-            if(a==-1){
+            if (a == -1) {
                 dist++;
                 q.add(-1);
-            }
-            else{
+            } else {
                 //Edge u = graph.get(a);
-                for(Edge e: graph.get(a)){
-                    if(!visited[e.v])
-                    {
+                for (Edge e : graph.get(a)) {
+                    if (!visited[e.v]) {
                         q.add(e.v);
                         visited[e.v] = true;
-                        dist[e.v] = dist;
+                        distArray[e.v] = dist;
                     }
-                    
+
                 }
             }
         }
+        for (int i = 0; i < distArray.length; i++) {
+            if (i != source) {
+                if (distArray[i] == 0)
+                    distArray[i] = -1;
+            }
+        }
+        return distArray;
     }
 
-}
-
-class Edge {
-    int u, v, weight;
-
-    public Edge(int u, int v, int weight) {
-        this.u = u;
-        this.v = v;
-        this.weight = weight;
-    }
 }
